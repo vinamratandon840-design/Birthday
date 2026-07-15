@@ -1,0 +1,183 @@
+:root{
+  --pink:#ff6f9c;
+  --pink-dark:#c8447a;
+  --cream:#fff8f2;
+  --blush:#ffe3ec;
+  --gold:#f4c95d;
+}
+
+*{box-sizing:border-box;}
+
+html, body{
+  margin:0;
+  padding:0;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: relative;
+  overflow: hidden;
+
+  background: linear-gradient(160deg, #fff8f2 0%, #ffe9f0 55%, #ffd9e6 100%);
+
+  /* fade transition, matches index.html */
+  opacity: 0;
+  transition: opacity .6s ease;
+}
+body.loaded{ opacity: 1; }
+
+/* ---------- Soft floating hearts, matches the envelope theme ---------- */
+.hearts-bg{
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.bg-heart{
+  position: absolute;
+  bottom: -10%;
+  opacity: 0;
+  animation: bg-heart-rise linear infinite;
+}
+@keyframes bg-heart-rise{
+  0%{ opacity:0; transform: translateY(0) rotate(0deg); }
+  10%{ opacity:.5; }
+  90%{ opacity:.4; }
+  100%{ opacity:0; transform: translateY(-120vh) rotate(12deg); }
+}
+
+/* ---------- Title & close button ---------- */
+.note-title{
+  position: absolute;
+  top: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  color: var(--pink-dark);
+  text-shadow: 0 4px 16px rgba(255,111,156,.25);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.close-btn{
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: #fff;
+  color: var(--pink-dark);
+  font-size: 1.15rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(200,68,122,.25);
+  transition: transform .25s ease, box-shadow .25s ease, background .25s ease, color .25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.close-btn:hover{
+  transform: translateY(-2px) rotate(90deg);
+  box-shadow: 0 12px 26px rgba(200,68,122,.35);
+  background: var(--pink);
+  color: #fff;
+}
+
+/* ---------- Paper notes ---------- */
+.paper {
+  background-color: #fffdfb;
+  background-image:
+    linear-gradient(rgba(255,255,255,.55), rgba(255,255,255,.55)),
+    url("https://i0.wp.com/textures.world/wp-content/uploads/2018/10/2-Millimeter-Paper-Background-copy.jpg?ssl=1");
+  background-size: 500px;
+  background-position: center center;
+  padding: 20px 100px;
+
+  transform: rotateZ(-5deg);
+  box-shadow: 0 15px 30px rgba(200,68,122,.18), 0 0 0 1px rgba(255,111,156,.12);
+  border-radius: 4px;
+
+  position: absolute;
+  z-index: 1;
+}
+
+.paper.heart {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  padding: 0;
+  border-radius: 50%;
+}
+
+.paper.image {
+  padding: 10px;
+}
+.paper.image p {
+  font-size: 30px;
+}
+
+img {
+  max-height: 200px;
+  width: 100%;
+  user-select: none;
+  border-radius: 2px;
+}
+
+/* Fallback shown if a photo path doesn't resolve */
+.img-placeholder{
+  max-height: 200px;
+  width: 100%;
+  aspect-ratio: 4/5;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #ffe3ec, #fff2d9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 2rem;
+  color: rgba(200,68,122,.55);
+}
+.img-placeholder span{
+  font-size: .7rem;
+  font-family: 'Quicksand', sans-serif;
+  color: rgba(200,68,122,.5);
+}
+
+.paper.heart::after {
+  content: "";
+  background-image: url('https://cdn.pixabay.com/photo/2016/03/31/19/25/cartoon-1294994__340.png');
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-size: 150px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  opacity: 0.85;
+  filter: drop-shadow(0 0 10px rgba(255,111,156,.35));
+}
+
+p {
+  font-family: 'Zeyada', cursive;
+  font-size: 50px;
+  color: var(--pink-dark);
+  opacity: 0.92;
+  user-select: none;
+
+  filter: drop-shadow(1px 1.5px 1px rgba(200,68,122,0.25));
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.01ms !important; animation-iteration-count:1 !important;}
+}
